@@ -404,7 +404,7 @@ def main():
     train_sampler = data.sampler.SubsetRandomSampler(train_ids[:partial_size])
     trainloader = data.DataLoader(train_dataset,
                                   batch_size=batch_size_labeled, sampler=train_sampler, num_workers=num_workers,
-                                  pin_memory=True)
+                                  pin_memory=False)
     trainloader_iter = iter(trainloader)
     pdb.set_trace()
     # GTA5
