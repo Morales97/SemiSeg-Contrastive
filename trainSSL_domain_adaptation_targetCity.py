@@ -375,7 +375,7 @@ def main():
     from data.gta5_loader import gtaLoader
     data_loader_gta = gtaLoader
     data_path_gta = get_data_path('gta5')
-    data_aug_gta = Compose([RandomCrop_city(input_size)])  # from 1024x2048 to resize 512x1024 to crop input_size (512x512)
+    data_aug_gta = Compose([RandomCrop_city(input_size, is_gta=True)])  # from 1024x2048 to resize 512x1024 to crop input_size (512x512)
     train_dataset_gta = data_loader_gta(data_path_gta, is_transform=True, augmentations=data_aug_gta, img_size=input_size, pretraining=pretraining)
 
     train_dataset_size = len(train_dataset)
@@ -415,7 +415,7 @@ def main():
     lbl = np.array(lbl, dtype=np.uint8)
 
     pdb.set_trace()
-    img, lbl = self.data_aug_gta(img, lbl)
+    img, lbl = data_aug_gta(img, lbl)
     pdb.set_trace()
 
 

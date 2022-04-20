@@ -22,8 +22,9 @@ class Compose(object):
 
 
 class RandomCrop_city(object):
-    def __init__(self, size, padding=0):
+    def __init__(self, size, is_gta=False, padding=0):
         self.size = tuple(size)
+        self.is_gta = is_gta
         self.padding = padding
 
     def __call__(self, img, mask):
@@ -39,9 +40,11 @@ class RandomCrop_city(object):
 
         # Resize to half size
         # img = img.resize((int(w/2), int(h/2)), Image.BILINEAR) # NOTE using images already downscaled to half
-        mask = mask.resize((int(w/2), int(h/2)), Image.NEAREST)
-        print(mask.size)
-        print(img.size)
+        if is_gta:
+            mask = mask.resize((720, 1280), Image.NEAREST)
+        else:
+            mask = mask.resize((int(w/2), int(h/2)), Image.NEAREST)
+
         assert img.size == mask.size, 'Image and Mask of different size'
 
         # Random crop to input size
