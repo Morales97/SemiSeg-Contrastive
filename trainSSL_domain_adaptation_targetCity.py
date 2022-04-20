@@ -9,6 +9,8 @@ from torch.utils import data, model_zoo
 import math
 import pdb 
 import wandb
+from collections import OrderedDict
+
 
 from utils.loss import CrossEntropy2d
 from utils.loss import CrossEntropyLoss2dPixelWiseWeighted
@@ -763,7 +765,18 @@ def main():
         ema_model = update_ema_variables(ema_model=ema_model, model=model, alpha_teacher=m, iteration=i_iter)
 
 
-        print('iter = {0:6d}/{1:6d}, loss_l = {2:.3f}'.format(i_iter, num_iterations, loss_l_value))
+        # print('iter = {0:6d}/{1:6d}, loss_l = {2:.3f}'.format(i_iter, num_iterations, loss_l_value))
+
+
+        if i_iter % log_loss == 0:
+
+            log_info = OrderedDict({
+                'Train Step': i_iter,
+                'Loss': loss_l_value,
+            })
+            log_str = get_log_str(args, log_info, title='Training Log')
+            print(log_str)
+            wandb.log(rm_format(log_info))
 
         if i_iter % save_checkpoint_every == 0 and i_iter != 0:
             _save_checkpoint(i_iter, model, optimizer, config)
@@ -880,6 +893,7 @@ if __name__ == '__main__':
     random_seed = config['seed']
     pretraining = config['training']['pretraining']
     expt_name = config['utils']['expt_name']
+    log_loss = 50
 
     labeled_samples = config['training']['data']['labeled_samples']
 
@@ -902,7 +916,7 @@ if __name__ == '__main__':
     if 'save_teacher_test' in config['training']:
         save_teacher = config['training']['save_teacher_test']
 
-    #wandb.init(name=expt_name, dir=log_dir, config=config, reinit=True, project='Alonso_small', entity='morales97')
+    wandb.init(name=expt_name, dir=log_dir, config=config, reinit=True, project='Alonso_small', entity='morales97')
     main()
-    #wandb.finish()
+    wandb.finish()
 
