@@ -31,13 +31,14 @@ class RandomCrop_city(object):
             img = ImageOps.expand(img, border=self.padding, fill=0)
             mask = ImageOps.expand(mask, border=self.padding, fill=0)
 
-        assert img.size == mask.size
-        w, h = img.size
+        # assert img.size == mask.size
+        w, h = mask.size
         th, tw = self.size
 
         # Resize to half size
-        img = img.resize((int(w/2), int(h/2)), Image.BILINEAR)
+        # img = img.resize((int(w/2), int(h/2)), Image.BILINEAR) # NOTE using images already downscaled to half
         mask = mask.resize((int(w/2), int(h/2)), Image.NEAREST)
+        assert img.size == mask.size
 
         # Random crop to input size
         x1 = random.randint(0, int(w/2) - tw)

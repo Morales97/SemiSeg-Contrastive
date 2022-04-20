@@ -18,9 +18,9 @@ def get_data_path(name):
     :param config_file:
     """
     if name == 'cityscapes':
-        return '../data/CityScapes/'
+        return '../ssda/data/cityscapes/'
 
     if name == 'gta5':
-        return '../data/GTA5/'
+        return '../ssda/data/gta5/'
     if name == 'pascal_voc':
         return '../data/VOC2012/'

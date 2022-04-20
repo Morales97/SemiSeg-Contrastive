@@ -75,10 +75,10 @@ class gtaLoader(data.Dataset):
         )
         self.files = {}
 
-        self.images_base = os.path.join(self.root, "images", self.split)
+        self.images_base = os.path.join(self.root, "images_small")
 
         self.annotations_base = os.path.join(
-            self.root, "labels", self.split
+            self.root, "labels"
         )
 
         self.files[split] = recursive_glob(rootdir=self.images_base, suffix=".png")

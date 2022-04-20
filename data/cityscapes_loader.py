@@ -73,10 +73,10 @@ class cityscapesLoader(data.Dataset):
         )
         self.files = {}
 
-        self.images_base = os.path.join(self.root, "leftImg8bit_trainvaltest","leftImg8bit", self.split)
+        self.images_base = os.path.join(self.root, "leftImg8bit_small", self.split)
 
         self.annotations_base = os.path.join(
-            self.root, "gtFine_trainvaltest", "gtFine", self.split
+            self.root, "gtFine", self.split
         )
 
         self.files[split] = recursive_glob(rootdir=self.images_base, suffix=".png")
