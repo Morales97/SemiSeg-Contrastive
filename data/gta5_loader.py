@@ -137,6 +137,7 @@ class gtaLoader(data.Dataset):
 
             lbl = imageio.imread(lbl_path)
             lbl = np.array(lbl, dtype=np.uint8)
+            lbl = self.encode_segmap(lbl)
 
             if self.augmentations is not None:
                 img, lbl = self.augmentations(img, lbl)
