@@ -474,10 +474,6 @@ def main():
     model.load_state_dict(new_params)
     print('Model loaded')
 
-    model.eval()
-    mIoU, eval_loss = evaluate(model, dataset, ignore_label=ignore_label, save_dir=checkpoint_dir, pretraining=pretraining)
-    model.train()
-
     # Optimizer for segmentation network
     learning_rate_object = Learning_Rate_Object(config['training']['learning_rate'])
 
