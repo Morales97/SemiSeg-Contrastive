@@ -11,7 +11,6 @@ import pdb
 import wandb
 from collections import OrderedDict
 
-
 from utils.loss import CrossEntropy2d
 from utils.loss import CrossEntropyLoss2dPixelWiseWeighted
 
@@ -507,6 +506,7 @@ def main():
 
     # TRAINING
     print('Start training')
+    start_ts = time.time()
     for i_iter in range(start_iteration, num_iterations):
         model.train()  # set mode to training
         optimizer.zero_grad()
@@ -769,13 +769,15 @@ def main():
 
 
         if i_iter % log_loss == 0:
-
+            total_time = time.time() - start_ts
             log_info = OrderedDict({
                 'Train Step': i_iter,
                 'Loss': loss_l_value,
+                'Time per step': total_time / log_loss
             })
             print('iter = {0:6d}/{1:6d}, loss_l = {2:.3f}'.format(i_iter, num_iterations, loss_l_value))
             wandb.log(log_info)
+            start_ts = 0
 
         if i_iter % save_checkpoint_every == 0 and i_iter != 0:
             _save_checkpoint(i_iter, model, optimizer, config)
@@ -797,7 +799,16 @@ def main():
                 iters_without_improve = 0
             else:
                 iters_without_improve += val_per_iter
+            print('Current mIoU: ' + str(mIoU))
             print('Best mIoU: ' + str(best_mIoU))
+
+            log_info = OrderedDict({
+                'Train Step': i_iter,
+                'mIoU': mIoU,
+                'Best mIoU': best_mIoU
+            })
+            wandb.log(log_info)
+
 
             '''
             if the performance has not improve in N iterations, try to reload best model to optimize again with a lower LR
