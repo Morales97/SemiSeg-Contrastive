@@ -383,7 +383,7 @@ def main():
 
     partial_size = labeled_samples
     print('Training on number of samples:', partial_size)
-    pdb.set_trace()
+    
 
     class_weights_curr = ClassBalancing(labeled_iters=int(labeled_samples / batch_size_labeled),
                                                   unlabeled_iters=int(
@@ -406,7 +406,7 @@ def main():
                                   batch_size=batch_size_labeled, sampler=train_sampler, num_workers=num_workers,
                                   pin_memory=True)
     trainloader_iter = iter(trainloader)
-
+    pdb.set_trace()
     # GTA5
     train_ids_gta = np.arange(len(train_dataset_gta))
     np.random.shuffle(train_ids_gta)
@@ -422,7 +422,7 @@ def main():
                                          batch_size=batch_size_unlabeled, sampler=train_remain_sampler,
                                          num_workers=num_workers, pin_memory=True)
     trainloader_remain_iter = iter(trainloader_remain)
-
+    pdb.set_trace()
     # LOSSES
     unlabeled_loss = CrossEntropyLoss2dPixelWiseWeighted().cuda()
     supervised_loss = CrossEntropy2d(ignore_label=ignore_label).cuda()
