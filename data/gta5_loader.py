@@ -129,7 +129,6 @@ class gtaLoader(data.Dataset):
         :param index:
         """
         img_path = self.files[self.split][index].rstrip()
-        lbl_path = img_path.replace('images_small', 'labels')
         lbl_path = img_path.replace('images_small', 'labels')[:-4] + ".png"
 
         try:
@@ -149,7 +148,7 @@ class gtaLoader(data.Dataset):
                 return img, lbl, img_name, img_name, index
             return img, lbl, img_path, lbl_path, img_name
         except:
-            print('GTA Loader ERROR -- ' + img_path)
+            print('GTA Loader ERROR -- ' + img_path + ' -- ' + lbl_path)
             self.files[self.split].pop(index)
             return self.__getitem__(index - 1)
 
