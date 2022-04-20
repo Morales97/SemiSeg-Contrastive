@@ -404,7 +404,7 @@ def main():
     train_sampler = data.sampler.SubsetRandomSampler(train_ids[:partial_size])
     trainloader = data.DataLoader(train_dataset,
                                   batch_size=batch_size_labeled, sampler=train_sampler, num_workers=num_workers,
-                                  pin_memory=False)
+                                  pin_memory=True)
     trainloader_iter = iter(trainloader)
     pdb.set_trace()
     # GTA5
@@ -415,7 +415,7 @@ def main():
                                   batch_size=batch_size_labeled, sampler=train_sampler_gta, num_workers=num_workers,
                                   pin_memory=True)
     trainloader_iter_gta = iter(trainloader_gta)
-
+    pdb.set_trace()
 
     train_remain_sampler = data.sampler.SubsetRandomSampler(train_ids[partial_size:])
     trainloader_remain = data.DataLoader(train_dataset,
