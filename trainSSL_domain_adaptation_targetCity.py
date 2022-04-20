@@ -349,6 +349,7 @@ def augment_samples(images, labels, probs, do_classmix, batch_size, ignore_label
 
 def main():
     print(config)
+    pdb.set_trace()
     cudnn.enabled = True
     torch.manual_seed(random_seed)
     torch.cuda.manual_seed(random_seed)
