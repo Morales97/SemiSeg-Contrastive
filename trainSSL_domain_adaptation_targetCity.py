@@ -473,6 +473,7 @@ def main():
             new_params[name].copy_(saved_state_dict[name])
 
     model.load_state_dict(new_params)
+    print('Model loaded')
 
     # Optimizer for segmentation network
     learning_rate_object = Learning_Rate_Object(config['training']['learning_rate'])
@@ -504,6 +505,7 @@ def main():
     iters_without_improve = 0
 
     # TRAINING
+    print('Start training')
     for i_iter in range(start_iteration, num_iterations):
         model.train()  # set mode to training
         optimizer.zero_grad()
