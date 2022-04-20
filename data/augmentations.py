@@ -32,6 +32,8 @@ class RandomCrop_city(object):
             img = ImageOps.expand(img, border=self.padding, fill=0)
             mask = ImageOps.expand(mask, border=self.padding, fill=0)
 
+        print(img.size)
+        print(mask.size)
         # assert img.size == mask.size
         w, h = mask.size
         th, tw = self.size
