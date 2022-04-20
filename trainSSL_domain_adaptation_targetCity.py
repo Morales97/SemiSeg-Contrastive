@@ -407,6 +407,8 @@ def main():
                                   pin_memory=True)
     trainloader_iter = iter(trainloader)
 
+    '''
+    # DM: for debugging
     import imageio
     img = imageio.imread('/home/danmoral/ssda/data/gta5/images_small/18555.jpg')
     img = np.array(img, dtype=np.uint8)
@@ -420,6 +422,7 @@ def main():
     pdb.set_trace()
     img, lbl = data_aug_gta(img, lbll)
     pdb.set_trace()
+    '''
 
 
     # GTA5

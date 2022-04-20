@@ -142,7 +142,6 @@ class gtaLoader(data.Dataset):
 
             if self.augmentations is not None:
                 img, lbl = self.augmentations(img, lbl)
-            print('gucci')
             if self.is_transform:
                 img, lbl = self.transform(img, lbl)
 
