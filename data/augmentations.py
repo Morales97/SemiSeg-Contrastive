@@ -14,7 +14,7 @@ class Compose(object):
 
     def __call__(self, img, mask):
         img, mask = Image.fromarray(img, mode="RGB"), Image.fromarray(mask, mode="L")
-        assert img.size == mask.size
+        #assert img.size == mask.size
         for a in self.augmentations:
             img, mask = a(img, mask)
         return np.array(img), np.array(mask, dtype=np.uint8)
