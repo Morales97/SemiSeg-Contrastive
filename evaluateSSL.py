@@ -110,7 +110,7 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
             model.cuda()
             output = model(normalize(image, dataset).cuda())
             criterion = CrossEntropy2d(ignore_label=ignore_label).cuda()
-
+            pdb.set_trace()
             loss = criterion(output, label)
 
             total_loss.append(loss.item())
