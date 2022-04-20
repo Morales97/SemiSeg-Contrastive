@@ -406,24 +406,22 @@ def main():
                                   batch_size=batch_size_labeled, sampler=train_sampler, num_workers=num_workers,
                                   pin_memory=True)
     trainloader_iter = iter(trainloader)
-    pdb.set_trace()
+
     # GTA5
     train_ids_gta = np.arange(len(train_dataset_gta))
     np.random.shuffle(train_ids_gta)
-    train_sampler_gta = data.sampler.SubsetRandomSampler(train_ids_gta[:10])
-    pdb.set_trace()
+    train_sampler_gta = data.sampler.SubsetRandomSampler(train_ids_gta)
     trainloader_gta = data.DataLoader(train_dataset_gta,
                                   batch_size=batch_size_labeled, sampler=train_sampler_gta, num_workers=num_workers,
                                   pin_memory=True)
     trainloader_iter_gta = iter(trainloader_gta)
-    pdb.set_trace()
 
     train_remain_sampler = data.sampler.SubsetRandomSampler(train_ids[partial_size:])
     trainloader_remain = data.DataLoader(train_dataset,
                                          batch_size=batch_size_unlabeled, sampler=train_remain_sampler,
                                          num_workers=num_workers, pin_memory=True)
     trainloader_remain_iter = iter(trainloader_remain)
-    pdb.set_trace()
+
     # LOSSES
     unlabeled_loss = CrossEntropyLoss2dPixelWiseWeighted().cuda()
     supervised_loss = CrossEntropy2d(ignore_label=ignore_label).cuda()
