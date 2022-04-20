@@ -422,6 +422,7 @@ def main():
                                          num_workers=num_workers, pin_memory=True)
     trainloader_remain_iter = iter(trainloader_remain)
 
+    pdb.set_trace()
     # LOSSES
     unlabeled_loss = CrossEntropyLoss2dPixelWiseWeighted().cuda()
     supervised_loss = CrossEntropy2d(ignore_label=ignore_label).cuda()

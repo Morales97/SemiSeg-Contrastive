@@ -149,7 +149,7 @@ class gtaLoader(data.Dataset):
                 return img, lbl, img_name, img_name, index
             return img, lbl, img_path, lbl_path, img_name
         except:
-            print(img_path)
+            print('GTA Loader ERROR -- ' + img_path)
             self.files[self.split].pop(index)
             return self.__getitem__(index - 1)
 
