@@ -128,7 +128,7 @@ class gtaLoader(data.Dataset):
         :param index:
         """
         img_path = self.files[self.split][index].rstrip()
-        lbl_path = img_path.replace('images', 'labels')
+        lbl_path = img_path.replace('images_small', 'labels')
 
         try:
             img = m.imread(img_path)
