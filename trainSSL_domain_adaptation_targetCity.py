@@ -410,7 +410,7 @@ def main():
     # GTA5
     train_ids_gta = np.arange(len(train_dataset_gta))
     np.random.shuffle(train_ids_gta)
-    train_sampler_gta = data.sampler.SubsetRandomSampler(train_ids_gta)
+    train_sampler_gta = data.sampler.SubsetRandomSampler(train_ids_gta[:10])
     trainloader_gta = data.DataLoader(train_dataset_gta,
                                   batch_size=batch_size_labeled, sampler=train_sampler_gta, num_workers=num_workers,
                                   pin_memory=True)
