@@ -80,10 +80,8 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
             data_aug = Compose([Resize_city()])
         else: # for deeplabv3 oirginal resolution
             data_aug = Compose([Resize_city_highres()])
-        pdb.set_trace()
         test_dataset = data_loader(data_path, is_transform=True, split='val',
                                    augmentations=data_aug, pretraining=pretraining)
-        pdb.set_trace()
         testloader = data.DataLoader(test_dataset, batch_size=1, shuffle=False, pin_memory=True)
 
     print('Evaluating, found ' + str(len(testloader)) + ' images.')
@@ -95,8 +93,11 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
 
     for index, batch in enumerate(testloader):
         image, label, size, name, _ = batch
+        image = image.cuda()
+        label = label.cuda()
 
         with torch.no_grad():
+            '''
             interp = torch.nn.Upsample(size=(label.shape[1], label.shape[2]), mode='bilinear', align_corners=True)
             output = model(normalize(Variable(image).cuda(), dataset))
             output = interp(output)
@@ -105,7 +106,13 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
             criterion = CrossEntropy2d(ignore_label=ignore_label).cuda()
             loss = criterion(output, label_cuda)
             total_loss.append(loss.item())
+            '''
+            output = model(normalize(image), dataset))
+            criterion = CrossEntropy2d(ignore_label=ignore_label).cuda()
 
+            loss = criterion(output, label)
+
+            total_loss.append(loss.item())
             output = output.cpu().data[0].numpy()
             gt = np.asarray(label[0].numpy(), dtype=np.int)
 
