@@ -40,8 +40,8 @@ class RandomCrop_city(object):
 
         # Resize to half size
         # img = img.resize((int(w/2), int(h/2)), Image.BILINEAR) # NOTE using images already downscaled to half
-        if is_gta:
-            mask = mask.resize((720, 1280), Image.NEAREST)
+        if self.is_gta:
+            mask = mask.resize((1280, 720), Image.NEAREST)
         else:
             mask = mask.resize((int(w/2), int(h/2)), Image.NEAREST)
 
