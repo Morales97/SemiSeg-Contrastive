@@ -775,7 +775,7 @@ def main():
                 'Loss': loss_l_value,
             })
             print('iter = {0:6d}/{1:6d}, loss_l = {2:.3f}'.format(i_iter, num_iterations, loss_l_value))
-            wandb.log(rm_format(log_info))
+            wandb.log(log_info)
 
         if i_iter % save_checkpoint_every == 0 and i_iter != 0:
             _save_checkpoint(i_iter, model, optimizer, config)
