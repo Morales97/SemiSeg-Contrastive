@@ -110,7 +110,7 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
             '''
             model.cuda()
             output = model(normalize(image, dataset).cuda())
-            output = F.interpolate(output, size=label.shape, mode="bilinear", align_corners=True)
+            output = F.interpolate(output, size=(label.shape[1], label.shape[2]), mode="bilinear", align_corners=True)
 
             criterion = CrossEntropy2d(ignore_label=ignore_label).cuda()
             pdb.set_trace()
