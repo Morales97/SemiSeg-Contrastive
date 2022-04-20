@@ -902,7 +902,7 @@ if __name__ == '__main__':
     if 'save_teacher_test' in config['training']:
         save_teacher = config['training']['save_teacher_test']
 
-    wandb.init(name=expt_name, dir=log_dir, config=config, reinit=True, project='Alonso_small', entity='morales97')
+    #wandb.init(name=expt_name, dir=log_dir, config=config, reinit=True, project='Alonso_small', entity='morales97')
     main()
-    wandb.finish()
+    #wandb.finish()
 
