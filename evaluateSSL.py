@@ -11,6 +11,7 @@ from multiprocessing import Pool
 from torch.autograd import Variable
 from torch.utils import data
 import torch
+from torch.nn import functional as F
 from data import get_data_path, get_loader
 from utils.loss import CrossEntropy2d
 import pdb
@@ -109,6 +110,8 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
             '''
             model.cuda()
             output = model(normalize(image, dataset).cuda())
+            output = F.interpolate(output, size=label.shape, mode="bilinear", align_corners=True)
+
             criterion = CrossEntropy2d(ignore_label=ignore_label).cuda()
             pdb.set_trace()
             loss = criterion(output, label)
