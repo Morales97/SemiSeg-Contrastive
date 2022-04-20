@@ -419,7 +419,7 @@ def main():
     train_remain_sampler = data.sampler.SubsetRandomSampler(train_ids[partial_size:])
     trainloader_remain = data.DataLoader(train_dataset,
                                          batch_size=batch_size_unlabeled, sampler=train_remain_sampler,
-                                         num_workers=num_workers, pin_memory=True)
+                                         num_workers=num_workers, pin_memory=False)
     trainloader_remain_iter = iter(trainloader_remain)
 
     pdb.set_trace()
