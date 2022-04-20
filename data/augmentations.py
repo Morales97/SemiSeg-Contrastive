@@ -38,6 +38,8 @@ class RandomCrop_city(object):
         # Resize to half size
         # img = img.resize((int(w/2), int(h/2)), Image.BILINEAR) # NOTE using images already downscaled to half
         mask = mask.resize((int(w/2), int(h/2)), Image.NEAREST)
+        print(mask.size)
+        print(img.size)
         assert img.size == mask.size, 'Image and Mask of different size'
 
         # Random crop to input size
