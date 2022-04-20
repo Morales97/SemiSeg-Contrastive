@@ -85,14 +85,13 @@ class Resize_city(object):
         if self.padding > 0:
             img = ImageOps.expand(img, border=self.padding, fill=0)
             mask = ImageOps.expand(mask, border=self.padding, fill=0)
-
+        
+        #assert img.size == mask.size
         w, h = img.size
 
         # Resize to half size
         # img = img.resize((int(w/2), int(h/2)), Image.BILINEAR) # NOTE using images already downscaled to half
-        mask = mask.resize((int(w), int(h)), Image.NEAREST) # NOTE DM addition. They did not downscale the mask to half resolution?
-
-        assert img.size == mask.size
+        # mask = mask.resize((int(w), int(h)), Image.NEAREST) # NOTE DM addition. They did not downscale the mask to half resolution?
 
         return img, mask
 
