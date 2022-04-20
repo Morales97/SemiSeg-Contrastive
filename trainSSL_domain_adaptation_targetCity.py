@@ -785,6 +785,7 @@ def main():
                 iters_without_improve = 0
             else:
                 iters_without_improve += val_per_iter
+            print('Best mIoU: ' + str(best_mIoU))
 
             '''
             if the performance has not improve in N iterations, try to reload best model to optimize again with a lower LR
@@ -901,4 +902,7 @@ if __name__ == '__main__':
     if 'save_teacher_test' in config['training']:
         save_teacher = config['training']['save_teacher_test']
 
+    wandb.init(name=expt_name, dir=log_dir, config=config, reinit=True, project='Alonso_small', entity='morales97')
     main()
+    wandb.finish()
+

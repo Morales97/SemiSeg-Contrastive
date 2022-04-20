@@ -126,7 +126,7 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
             # cv2.imwrite(filename, output)
 
         if (index + 1) % 100 == 0:
-            # print('%d processed' % (index + 1))
+            print('%d processed' % (index + 1))
             process_list_evaluation(confM, data_list)
             data_list = []
 
@@ -134,6 +134,7 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
 
     mIoU = get_iou(confM, dataset)
     loss = np.mean(total_loss)
+    print(mIoU)
     return mIoU, loss
 
 
