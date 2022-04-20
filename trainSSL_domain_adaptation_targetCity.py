@@ -414,6 +414,8 @@ def main():
     lbl = imageio.imread('/home/danmoral/ssda/data/gta5/labels/18555.png')
     lbl = np.array(lbl, dtype=np.uint8)
     lbll = Image.open('/home/danmoral/ssda/data/gta5/labels/18555.png')
+    lbll = np.array(lbll, dtype=np.uint8)
+
     #lbl = train_dataset_gta.encode_segmap(lbll)
     pdb.set_trace()
     img, lbl = data_aug_gta(img, lbl)
