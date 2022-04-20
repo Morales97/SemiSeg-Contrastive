@@ -7,6 +7,7 @@ from contrastive_losses import *
 import torch.backends.cudnn as cudnn
 from torch.utils import data, model_zoo
 import math
+import pdb 
 
 from utils.loss import CrossEntropy2d
 from utils.loss import CrossEntropyLoss2dPixelWiseWeighted
@@ -436,6 +437,7 @@ def main():
     else:
         from model.deeplabv3 import Res_Deeplab
 
+    pdb.set_trace()
     # create network
     model = Res_Deeplab(num_classes=num_classes)
 
