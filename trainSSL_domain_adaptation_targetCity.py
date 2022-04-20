@@ -8,6 +8,7 @@ import torch.backends.cudnn as cudnn
 from torch.utils import data, model_zoo
 import math
 import pdb 
+import wandb
 
 from utils.loss import CrossEntropy2d
 from utils.loss import CrossEntropyLoss2dPixelWiseWeighted
@@ -440,7 +441,6 @@ def main():
                                          num_workers=num_workers, pin_memory=True)
     trainloader_remain_iter = iter(trainloader_remain)
 
-    pdb.set_trace()
     # LOSSES
     unlabeled_loss = CrossEntropyLoss2dPixelWiseWeighted().cuda()
     supervised_loss = CrossEntropy2d(ignore_label=ignore_label).cuda()
@@ -456,7 +456,6 @@ def main():
     else:
         from model.deeplabv3 import Res_Deeplab
 
-    pdb.set_trace()
     # create network
     model = Res_Deeplab(num_classes=num_classes)
 
@@ -474,6 +473,10 @@ def main():
 
     model.load_state_dict(new_params)
     print('Model loaded')
+
+    model.eval()
+    mIoU, eval_loss = evaluate(model, dataset, ignore_label=ignore_label, save_dir=checkpoint_dir, pretraining=pretraining)
+    model.train()
 
     # Optimizer for segmentation network
     learning_rate_object = Learning_Rate_Object(config['training']['learning_rate'])
@@ -879,6 +882,7 @@ if __name__ == '__main__':
     num_workers = config['training']['num_workers']
     random_seed = config['seed']
     pretraining = config['training']['pretraining']
+    expt_name = config['utils']['expt_name']
 
     labeled_samples = config['training']['data']['labeled_samples']
 

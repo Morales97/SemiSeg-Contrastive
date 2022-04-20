@@ -28,6 +28,7 @@
     "save_checkpoint_every": 200000,
     "checkpoint_dir": "model/ckpts",
     "val_per_iter": 1,
-    "save_best_model": true
+    "save_best_model": true,
+    "expt_name": "test"
   }
 }
