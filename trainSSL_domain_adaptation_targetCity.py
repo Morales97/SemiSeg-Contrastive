@@ -349,7 +349,6 @@ def augment_samples(images, labels, probs, do_classmix, batch_size, ignore_label
 
 def main():
     print(config)
-    pdb.set_trace()
     cudnn.enabled = True
     torch.manual_seed(random_seed)
     torch.cuda.manual_seed(random_seed)
@@ -384,6 +383,7 @@ def main():
 
     partial_size = labeled_samples
     print('Training on number of samples:', partial_size)
+    pdb.set_trace()
 
     class_weights_curr = ClassBalancing(labeled_iters=int(labeled_samples / batch_size_labeled),
                                                   unlabeled_iters=int(
