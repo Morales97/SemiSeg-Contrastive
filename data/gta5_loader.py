@@ -11,6 +11,7 @@ import imageio
 from torch.utils import data
 from data.city_utils import recursive_glob
 from data.augmentations import *
+from PIL import Image
 
 class gtaLoader(data.Dataset):
     """cityscapesLoader
@@ -135,7 +136,7 @@ class gtaLoader(data.Dataset):
             img = imageio.imread(img_path)
             img = np.array(img, dtype=np.uint8)
 
-            lbl = imageio.imread(lbl_path)
+            lbl = Image.open(lbl_path)
             lbl = np.array(lbl, dtype=np.uint8)
             lbl = self.encode_segmap(lbl)
 
