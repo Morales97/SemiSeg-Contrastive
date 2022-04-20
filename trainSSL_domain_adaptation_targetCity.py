@@ -407,6 +407,18 @@ def main():
                                   pin_memory=True)
     trainloader_iter = iter(trainloader)
 
+    import imageio
+    img = imageio.imread('/home/danmoral/ssda/data/gta5/images_small/18555.jpg')
+    img = np.array(img, dtype=np.uint8)
+
+    lbl = imageio.imread('/home/danmoral/ssda/data/gta5/labels/18555.png')
+    lbl = np.array(lbl, dtype=np.uint8)
+
+    pdb.set_trace()
+    img, lbl = self.data_aug_gta(img, lbl)
+    pdb.set_trace()
+
+
     # GTA5
     train_ids_gta = np.arange(len(train_dataset_gta))
     np.random.shuffle(train_ids_gta)
