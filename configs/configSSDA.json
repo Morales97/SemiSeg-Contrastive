@@ -16,6 +16,7 @@
     "pretraining": "imagenet",
 
     "data": {
+      "split_id_list": null,
       "labeled_samples": 100,
       "input_size": "512,512"
     }
