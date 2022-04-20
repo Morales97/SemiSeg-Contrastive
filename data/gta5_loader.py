@@ -7,6 +7,7 @@ Slightly modified
 import os
 import torch
 import scipy.misc as m
+import imageio
 from torch.utils import data
 from data.city_utils import recursive_glob
 from data.augmentations import *
@@ -132,10 +133,10 @@ class gtaLoader(data.Dataset):
         lbl_path = img_path.replace('images_small', 'labels')[:-4] + ".png"
 
         try:
-            img = m.imread(img_path)
+            img = imageio.imread(img_path)
             img = np.array(img, dtype=np.uint8)
 
-            lbl = m.imread(lbl_path)
+            lbl = imageio.imread(lbl_path)
             lbl = np.array(lbl, dtype=np.uint8)
 
             if self.augmentations is not None:

@@ -6,6 +6,7 @@ Slightly modified
 import os
 import torch
 import scipy.misc as m
+import imageio
 from torch.utils import data
 from data.city_utils import recursive_glob
 from data.augmentations import *
@@ -132,12 +133,12 @@ class cityscapesLoader(data.Dataset):
             os.path.basename(img_path)[:-15] + "gtFine_labelIds.png",
         )
         try:
-            img = m.imread(img_path)
+            img = imageio.imread(img_path)
             img = np.array(img, dtype=np.uint8)
         except:
             print(img_path)
 
-        lbl = m.imread(lbl_path)
+        lbl = imageio.imread(lbl_path)
         lbl = np.array(lbl, dtype=np.uint8)
         lbl = self.encode_segmap(lbl)
 
