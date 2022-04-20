@@ -504,6 +504,10 @@ def main():
     best_mIoU = 0  # best metric while training
     iters_without_improve = 0
 
+    model.eval()
+    mIoU, eval_loss = evaluate(model, dataset, ignore_label=ignore_label, save_dir=checkpoint_dir, pretraining=pretraining)
+    model.train()
+
     # TRAINING
     print('Start training')
     start_ts = time.time()
