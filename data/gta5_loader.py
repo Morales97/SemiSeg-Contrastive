@@ -129,6 +129,7 @@ class gtaLoader(data.Dataset):
         """
         img_path = self.files[self.split][index].rstrip()
         lbl_path = img_path.replace('images_small', 'labels')
+        lbl_path = img_path.replace('images_small', 'labels')[:-4] + ".png"
 
         try:
             img = m.imread(img_path)
