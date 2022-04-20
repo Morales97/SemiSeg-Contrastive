@@ -774,8 +774,7 @@ def main():
                 'Train Step': i_iter,
                 'Loss': loss_l_value,
             })
-            log_str = get_log_str(args, log_info, title='Training Log')
-            print(log_str)
+            print('iter = {0:6d}/{1:6d}, loss_l = {2:.3f}'.format(i_iter, num_iterations, loss_l_value))
             wandb.log(rm_format(log_info))
 
         if i_iter % save_checkpoint_every == 0 and i_iter != 0:
