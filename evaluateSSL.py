@@ -118,7 +118,7 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
 
             total_loss.append(loss.item())
             output = output.cpu().data[0].numpy()
-            gt = np.asarray(label[0].numpy(), dtype=np.int)
+            gt = np.asarray(label[0].cpu().numpy(), dtype=np.int)
 
             output = np.asarray(np.argmax(output, axis=0), dtype=np.int)
             data_list.append((np.reshape(gt, (-1)), np.reshape(output, (-1))))
