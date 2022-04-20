@@ -83,6 +83,7 @@ def evaluate(model, dataset, deeplabv2=True, ignore_label=250, save_dir=None, pr
         pdb.set_trace()
         test_dataset = data_loader(data_path, is_transform=True, split='val',
                                    augmentations=data_aug, pretraining=pretraining)
+        pdb.set_trace()
         testloader = data.DataLoader(test_dataset, batch_size=1, shuffle=False, pin_memory=True)
 
     print('Evaluating, found ' + str(len(testloader)) + ' images.')
