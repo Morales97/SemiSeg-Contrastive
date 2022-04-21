@@ -11,4 +11,5 @@
 #SBATCH --mem=30000
 #SBATCH --time=12:00:00
 
-python trainSSL_domain_adaptation_targetCity.py --config ./configs/configSSDA.json 
+#python trainSSL_domain_adaptation_targetCity.py --config ./configs/configSSDA.json 
+python trainSSL_domain_adaptation_targetCity.py --resume=model/ckpts/alonso_16k.pth
