@@ -473,7 +473,7 @@ def main(resume):
             new_params[name].copy_(saved_state_dict[name])
 
     model.load_state_dict(new_params)
-    if resume is not None
+    if resume is not None:
         model_sd = torch.load(resume)['model']
         model.load_state_dict(model_sd)
         print('Loading model from checkpoint ' + resume)
