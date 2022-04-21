@@ -349,7 +349,7 @@ def augment_samples(images, labels, probs, do_classmix, batch_size, ignore_label
 
     return image_aug, labels_aug, probs_aug, params
 
-def main():
+def main(resume):
     print(config)
     cudnn.enabled = True
     torch.manual_seed(random_seed)
@@ -473,6 +473,11 @@ def main():
             new_params[name].copy_(saved_state_dict[name])
 
     model.load_state_dict(new_params)
+    if resume is not None
+        model_sd = torch.load(resume)['model']
+        model.load_state_dict(model_sd)
+        print('Loading model from checkpoint ' + resume)
+
     print('Model loaded')
 
     # Optimizer for segmentation network
@@ -909,7 +914,7 @@ if __name__ == '__main__':
 
     save_checkpoint_every = config['utils']['save_checkpoint_every']
     if args.resume:
-        checkpoint_dir = os.path.join(*args.resume.split('/')[:-1]) + '_resume-'
+        checkpoint_dir = os.path.join(*args.resume.split('/')[:-1]) #+ '_resume-'
     else:
         checkpoint_dir = os.path.join(config['utils']['checkpoint_dir'])
     log_dir = checkpoint_dir
@@ -927,6 +932,6 @@ if __name__ == '__main__':
         save_teacher = config['training']['save_teacher_test']
 
     wandb.init(name=expt_name, dir=log_dir, config=config, reinit=True, project='Alonso_small', entity='morales97')
-    main()
+    main(args.resume)
     wandb.finish()
 
